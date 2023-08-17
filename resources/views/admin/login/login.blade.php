@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Skydash Admin</title>
+  <title>Ecommmerce Admin Panel</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{ asset('admin') }}/vendors/feather/feather.css">
   <link rel="stylesheet" href="{{ asset('admin') }}/vendors/ti-icons/css/themify-icons.css">
@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="{{ asset('admin') }}/css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="{{ asset('admin') }}/images/favicon.png" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
 </head>
 
 <body>
@@ -31,15 +33,22 @@
               </div>
               <h4>Hello! let's get started</h4>
               <h6 class="font-weight-light">Sign in to continue.</h6>
-              <form class="pt-3">
+              <form class="pt-3" action="{{ url('admin/login') }}" method="post">
+                @csrf
+                @if (Session::has('error_message'))
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                  <strong>Error:</strong> {{ Session::get('error_message') }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
+                  <input type="email" name="email" class="form-control form-control-lg" id="email" placeholder="Enter Email">
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                  <input type="password" name="password" class="form-control form-control-lg" id="password" placeholder="Enter Password">
                 </div>
                 <div class="mt-3">
-                  <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="{{ asset('admin') }}/index.html">SIGN IN</a>
+                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Sign In</button>
                 </div>
                 <div class="my-2 d-flex justify-content-between align-items-center">
                   <div class="form-check">
@@ -74,11 +83,14 @@
   <!-- Plugin js for this page -->
   <!-- End plugin js for this page -->
   <!-- inject:js -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="{{ asset('admin') }}/js/off-canvas.js"></script>
   <script src="{{ asset('admin') }}/js/hoverable-collapse.js"></script>
   <script src="{{ asset('admin') }}/js/template.js"></script>
   <script src="{{ asset('admin') }}/js/settings.js"></script>
-  <script src="{{ asset('admin') }}/js/todolist.js"></script>0
+  <script src="{{ asset('admin') }}/js/todolist.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
   <!-- endinject -->
 </body>
 
