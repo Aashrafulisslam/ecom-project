@@ -29,11 +29,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__ . '/auth.php';
 Route::prefix('/admin')->group(function () {
     Route::match(['get','post'],'login', [AdminController::class, 'login']);
     Route::group(['middleware' => 'admin'], function () {
         Route::get('dashboard', [AdminController::class, 'dashboard']);
         Route::get('logout', [AdminController::class, 'logout']);
+        Route::match(['get','post'], 'update-admin-password', [AdminController::class, 'updateAdminPassword']);
     });
 });
+require __DIR__ . '/auth.php';
